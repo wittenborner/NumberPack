@@ -1,14 +1,31 @@
-{*******************************************************}
-{                                                       }
-{       Unit "NumberPack"                               }
-{                                                       }
-{       Universal compression routine for numbers       }
-{       2012, Initial Version 1.00, Jens-Erich Lange    }
-{                                                       }
-{       2017-08-17: Version 1.10, Jens-Erich Lange      }
-{       2017-12-17: Version 1.20, Jens-Erich Lange      }
-{                                                       }
-{*******************************************************}
+(*******************************************************************************
+NumberPack.pas
+--------------------------------------------------------------------------------
+Universal compression routine for numbers
+
+The core routines of NumberPack are "PackIntegers" and "UnpackIntegers".
+They work best with data that has some natural source like measuring samples.
+
+The surounding object "TNumberPack" handles integer and floating point numbers
+by simply defininig a decimal place that goes with the integer number.
+
+--------------------------------------------------------------------------------
+
+2918-02-02 - 1.30
+  -Change of string types to work with newer Delphi versions
+
+2017-12-17 - 1.20
+  -Preperation for an escape code. Nothing will happen yet
+
+2017-08-17 - 1.10
+  -Cleaned up code
+  -No more dependencies but 'math'
+  -32 and 64 bit support
+
+2012-01-01 - 1.00
+  -Initial version. For 32 bit integers only
+
+*******************************************************************************)
 
 unit NumberPack;
 
@@ -80,16 +97,8 @@ procedure UnpackIntegers(Input: DataStr; var Values: Integers);
 implementation
 
 uses
+  { Delphi }
   Math;
-
-(*
-Version history
-
-1.00 Initial version. Same functionality as version 1.1. For 32 bit only
-1.10 Cleaned up code. No more dependencies but 'math'. 32/64 bit
-1.20 Preperation for an escape code. Nothing will happen yet
-
-*)
 
 
 procedure PackIntegers(Values: Integers; var Output: DataStr);
